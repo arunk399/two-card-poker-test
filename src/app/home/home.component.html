@@ -1,0 +1,66 @@
+<div class="card px-4">
+  <div class="jumbotron">
+    <h1 class="card-header">2 Card Poker</h1>
+    <h5 class="card-header">Users</h5>
+    <div class="card-body">
+      <div class="btn-group" role="group">
+        <a class="btn btn btn-success" (click)="addUser()">
+          <i class="bi bi-plus-circle"></i>
+        </a>
+      </div>
+      &nbsp;
+      <div class="btn-group" role="group">
+        <button (click)="reshuffle()" class="btn btn-primary">Reshuffle</button>
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 15%;">Username</th>
+            <th scope="col" style="width: 15%;">First Name</th>
+            <th scope="col" style="width: 15%;">Last Name</th>
+            <th scope="col" style="width: 15%;">Email</th>
+            <th scope="col" style="width: 15%;">Phone Number</th>
+            <th scope="col" style="width: 15%;">Cards</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users; index as i">
+            <td>
+              <span *ngIf="editId !== user.id">{{user.username}}</span>
+              <input type="text" *ngIf="editId === user.id" class="form-control" [(ngModel)]="editUserObj.username"
+                placeholder="Username" />
+            </td>
+            <td>
+              <span *ngIf="editId !== user.id">{{user.first_name}}</span>
+              <input type="text" *ngIf="editId === user.id" class="form-control" [(ngModel)]="editUserObj.first_name"
+                placeholder="First Name" />
+            </td>
+            <td>
+              <span *ngIf="editId !== user.id">{{user.last_name}}</span>
+              <input type="text" *ngIf="editId === user.id" class="form-control" [(ngModel)]="editUserObj.last_name"
+                placeholder="Last Name" />
+            </td>
+            <td>
+              <span *ngIf="editId !== user.id">{{user.email}}</span>
+              <input type="text" *ngIf="editId === user.id" class="form-control" [(ngModel)]="editUserObj.email"
+                placeholder="Email" />
+            </td>
+            <td>
+              <span *ngIf="editId !== user.id">{{user.phone_number}}</span>
+              <input type="text" *ngIf="editId === user.id" class="form-control" [(ngModel)]="editUserObj.phone_number"
+                placeholder="Phone Number" />
+            </td>
+            <td><strong>{{ user.cards}}</strong></td>
+            <td>
+              <div class="btn-group" role="group"> <button (click)="deleteUser(user.id)"
+                  class="btn btn btn-danger">Delete</button>
+                <button (click)="editUser(user)" *ngIf="editId !== user.id" class="btn btn-warning">Edit</button>
+                <button (click)="saveUser(user)" *ngIf="editId === user.id" class="btn btn btn-success">Save</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
